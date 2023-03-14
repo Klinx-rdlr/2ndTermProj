@@ -45,10 +45,10 @@ public:
         Node* ptr = head;
 
         while (ptr != NULL) {
-            if (ptr ->idNumber == k) {
+            if (ptr->idNumber == k) {
                 temp = ptr;
             }
-            ptr = ptr -> next;
+            ptr = ptr->next;
         }
 
         return temp;
@@ -81,43 +81,43 @@ public:
             }
             else {
                 Node* ptr = head;
-                while (ptr -> next != NULL) {
-                    ptr = ptr -> next;
+                while (ptr->next != NULL) {
+                    ptr = ptr->next;
                 }
-                ptr -> next = n;
-                n -> previous = ptr;
+                ptr->next = n;
+                n->previous = ptr;
                 cout << "Node Appended" << endl;
             }
         }
     }
 
     // 5. Delete node by unique key. Basically De-Link not delete
-    void deleteNodeByKey(int k) {
+    void deleteNodeByKey(double k) {
         Node* ptr = nodeExists(k);
-        if (ptr == NULL) {
-            cout << "No node exists with key value: " << k << endl;
+        if (ptr == nullptr) {
+            cout << "Student ID with this number: " << k << " doesn't exist, please try again" << endl;
         }
         else {
 
-            if (head -> idNumber == k) {
-                head = head -> next;
-                cout << "Node UNLINKED with keys value : " << k << endl;
+            if (head->idNumber == k) {
+                head = head->next;
+                cout << "Student ID with number: " << k << " is officially deleted" << endl;
             }
             else {
-                Node* nextNode = ptr -> next;
-                Node* prevNode = ptr -> previous;
+                Node* nextNode = ptr->next;
+                Node* prevNode = ptr->previous;
                 // deleting at the end
-                if (nextNode == NULL) {
+                if (nextNode == nullptr) {
 
-                    prevNode -> next = NULL;
-                    cout << "Node Deleted at the END" << endl;
+                    prevNode->next = nullptr;
+                    cout << "Student ID with number: " << k << " is officially deleted" << endl;
                 }
 
                 //deleting in between
                 else {
-                    prevNode -> next = nextNode;
-                    nextNode -> previous = prevNode;
-                    cout << "Node Deleted in Between" << endl;
+                    prevNode->next = nextNode;
+                    nextNode->previous = prevNode;
+                    cout << "Student ID with number: " << k << " is officially deleted" << endl;
 
                 }
             }
@@ -129,7 +129,7 @@ public:
 
         Node* ptr = nodeExists(k);
         if (ptr != NULL) {
-           // ptr -> data  = d;
+            // ptr -> data  = d;
             cout << "Node Data Updated Successfully" << endl;
         }
         else {
@@ -140,14 +140,14 @@ public:
 
     // 7th printing
     void printList() {
-        if (head == NULL) {
+        if (head == nullptr) {
             cout << "No Nodes in Doubly Linked List";
         }
         else {
             cout << endl << "List of all student records\n";
             Node* temp = head;
 
-            while (temp != NULL) {
+            while (temp != nullptr) {
                 cout << "Student ID Number:" << '\t' << temp->idNumber << endl;
                 cout << "Full Name:" << '\t' << temp->fName << endl;
                 cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
@@ -156,38 +156,156 @@ public:
                 cout << "Degree Program:" << '\t' << temp->dProgram << endl;
                 cout << "Year Level: " << '\t' << temp->yLevel << endl;
                 cout << endl << endl;
-                temp = temp -> next;
+                temp = temp->next;
             }
         }
 
-    }
+    };
+
+
+    int listCount() {
+        int count = NULL;
+        if (head == nullptr) {
+            return 0;
+        }
+        else {
+            Node* temp = head;
+            while (temp != nullptr) {
+                count++;
+                temp = temp->next;
+            }
+            return count;
+        }
+    };
+    /*
+        int * collectRecord(string name) {
+                int size = listCount();
+                int* year_lvl = new int[size];
+                int* dd = new int[size];
+                int* mm = new int[size];
+                int* yy = new int[size];
+
+                Node* temp = head;
+                int i = 0;
+                while (temp != nullptr) {
+                    year_lvl[i] = temp->yLevel;
+                    dd[i] = temp->dd;
+                    mm[i] = temp->mm;
+                    yy[i] = temp->yy;
+
+                    i++;
+                    temp = temp->next;
+                }
+                if (name == "Birthday") {
+                    return
+                }
+
+                int* Birthday[3];
+                Birthday[0] = dd;
+                Birthday[1] = mm;
+                Birthday[]
+                for (int i = 0; i < size; i++) {
+
+                }
+                else {
+                    return year_lvl;
+                }
+        }
+    */
+
+
+    string* collectRecord(string name) {
+        int size = listCount();
+        string* fname = new string[size];
+        string* address = new string[size];
+        string* gender = new string[size];
+        string* degprog = new string[size];
+        Node* temp = head;
+        int i = 0;
+        if (temp == nullptr) {
+            return nullptr;
+        }
+        else {
+            while (temp != nullptr) {
+                fname[i] = temp->fName;
+                address[i] = temp->address;
+                gender[i] = temp->gender;
+                degprog[i] = temp->dProgram;
+                i++;
+                temp = temp->next;
+            }
+        };
+        if (name == "Name") {
+            return fname;
+        }
+        else if (name == "Address") {
+            return address;
+        }
+        else if (name == "Gender") {
+            return gender;
+        }
+        else if (name == "Degree Program") {
+            return degprog;
+        }
+    };
 
     void searchRecord(int id) {
         Node* temp = nodeExists(id);
-        cout << "Student ID Number:" << '\t' << temp->idNumber << endl;
-        cout << "Full Name:" << '\t' << temp->fName << endl;
-        cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
-        cout << "Address:" << '\t' << temp->address << endl;
-        cout << "Gender:" << '\t' << temp->gender << endl;
-        cout << "Degree Program:" << '\t' << temp->dProgram << endl;
-        cout << "Year Level: " << '\t' << temp->yLevel << endl;
-    }
+        if (temp != nullptr) {
+            cout << "Student ID Number:" << '\t' << temp->idNumber << endl;
+            cout << "Full Name:" << '\t' << temp->fName << endl;
+            cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
+            cout << "Address:" << '\t' << temp->address << endl;
+            cout << "Gender:" << '\t' << temp->gender << endl;
+            cout << "Degree Program:" << '\t' << temp->dProgram << endl;
+            cout << "Year Level: " << '\t' << temp->yLevel << endl;
+        }
+        else {
+            cout << "Student ID number: " << id << " doesn't exist\n";
+        }
+    };
 
     void searchRecord(string name) {
         Node* temp = nodeExists_name(name);
-        cout << "Student ID Number:" << '\t' << temp->idNumber << endl;
-        cout << "Full Name:" << '\t' << temp->fName << endl;
-        cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
-        cout << "Address:" << '\t' << temp->address << endl;
-        cout << "Gender:" << '\t' << temp->gender << endl;
-        cout << "Degree Program:" << '\t' << temp->dProgram << endl;
-        cout << "Year Level: " << '\t' << temp->yLevel << endl;
-    }
 
+        if (temp != nullptr) {
+            cout << "Student ID Number:" << '\t' << temp->idNumber << endl;
+            cout << "Full Name:" << '\t' << temp->fName << endl;
+            cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
+            cout << "Address:" << '\t' << temp->address << endl;
+            cout << "Gender:" << '\t' << temp->gender << endl;
+            cout << "Degree Program:" << '\t' << temp->dProgram << endl;
+            cout << "Year Level: " << '\t' << temp->yLevel << endl;
+        }
+        else {
+            cout << "Student Name: " << name << " doesn't exist\n";
+        }
+    };
+
+    void specificRecord(string name) {
+        system("cls");
+        Node* temp = head;
+        cout << "ID Number: " << "Gender: \n";
+        if (name == "Name" || name == "Gender" || name == "Address" || name == "Degree Program") {
+            string* values;
+            values = collectRecord(name);
+            int i = 0;
+            while (temp != nullptr) {
+                cout << temp->idNumber << '\t' << values[i] << endl;
+                i++;
+                temp = temp->next;
+            }
+
+        }
+
+    };
 };
 
 Node* makeStudent(Node* n1);
-void Search_Record(StudentRecord obj);
+void searchRecord(StudentRecord obj);
+void deleteRecord(StudentRecord obj);
+void displayAllRecords(StudentRecord obj);
+void displaySpecificRecord(StudentRecord obj);
 
 int main() {
 
@@ -223,30 +341,17 @@ int main() {
             break;
 
         case 2:
-            Search_Record(obj);
-            cout << "Press any key to go back\n";
-            _getch();
+            searchRecord(obj);
             break;
-        case 3:
-            system("cls");
-            char option;
-            obj.printList();
 
-            cout << "Press any key to go back\n";
-            _getch();
+        case 3:
+            displayAllRecords(obj);
             break;
         case 4:
-            cout << "" << endl;
-            cin >> idNumber;
-            // cin >> data1;
-             //obj.updateNodeByKey(key1, data1);
-
+            displaySpecificRecord(obj);
             break;
         case 5:
-            system("cls");
-            cout << "Delete Node By Student id number \nEnter the student id number to be deleted: " << endl;
-            cin >> idNumber;
-            obj.deleteNodeByKey(idNumber);
+            deleteRecord(obj);
             break;
         case 6:
             exit(EXIT_SUCCESS);
@@ -257,26 +362,94 @@ int main() {
     } while (option != 0);
 
     return 0;
-}
+};
 
 
-void Search_Record(StudentRecord obj) {
-    int user_option; string name; double idNumber;
-    cout << "Search for record using\n [1] Student ID number.\n [2] Student Name.\n " << endl;
-    cin >> user_option;
-    if (user_option == 1) {
-        cout << "Enter Student ID number";
+void displaySpecificRecord(StudentRecord obj) {
+    int option;
+    cout << setw(27) << arrow1 << "Choose what record to display" << arrow2 << endl;
+    cout << setw(27) << arrow1 << "-[1] Name-" << arrow2 << endl;
+    cout << setw(27) << arrow1 << "-[2] Birthday-" << arrow2 << endl;
+    cout << setw(27) << arrow1 << "-[3] Gender-" << arrow2 << endl << endl;
+    cout << setw(27) << arrow1 << "-[4] Address-" << arrow2 << endl;
+    cout << setw(27) << arrow1 << "-[5] Degree Program-" << arrow2 << endl;
+    cout << setw(27) << arrow1 << "-[6] Year Level-" << arrow2 << endl << endl;
+    cin >> option;
+
+    switch (option) {
+    case 1:
+        obj.specificRecord("Name");
+        _getch();
+        break;
+    case 2:
+        obj.specificRecord("Birthday");
+        _getch();
+        break;
+    case 3:
+        obj.specificRecord("Gender");
+        _getch();
+        break;
+    case 4:
+        obj.specificRecord("Address");
+        _getch();
+        break;
+    case 5:
+        obj.specificRecord("Degree Program");
+        _getch();
+        break;
+    case 6:
+        obj.specificRecord("Year Level");
+        _getch();
+        break;
+    default:
+        cout << "Invalid input";
+    }
+};
+
+
+
+    void displayAllRecords(StudentRecord obj) {
+        system("cls");
+        char option;
+        obj.printList();
+
+        cout << "Press any key to go back\n";
+        _getch();
+        return;
+    };
+
+    void searchRecord(StudentRecord obj) {
+        int user_option; string name; double idNumber;
+        cout << "Search for record using\n [1] Student ID number.\n [2] Student Name.\n " << endl;
+        cin >> user_option;
+        if (user_option == 1) {
+            cout << "Enter Student ID number";
+            cin >> idNumber;
+            obj.searchRecord(idNumber);
+        }
+        else if (user_option == 2) {
+            cout << "Enter Student Name";
+            cin >> name;
+            obj.searchRecord(name);
+        }
+        else {
+            cout << "wrong input, try again";
+            return;
+        }
+
+        cout << "Press any key to go back\n";
+        _getch();
+        return;
+    };
+
+    void deleteRecord(StudentRecord obj) {
+        system("cls");
+        double idNumber;
+        cout << "Delete Node By Student id number \nEnter the student id number to be deleted: " << endl;
         cin >> idNumber;
-        obj.searchRecord(idNumber);
-    }
-    else if (user_option == 2) {
-        cout << "Enter Student Name";
-        cin >> name;
-        obj.searchRecord(name);
-    }
-}
-
-
+        obj.deleteNodeByKey(idNumber);
+        return;
+    };
 
 Node* makeStudent(Node* n1) {
     double idNumber;
