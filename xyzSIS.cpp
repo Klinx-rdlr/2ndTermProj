@@ -156,13 +156,13 @@ public:
             Node* temp = head;
 
             while (temp != nullptr) {
-                cout << "Student ID Number:" << '\t' << temp->idNumber << endl;
+                cout << "Student ID Number:" << '\t' << fixed << setprecision(0) << temp->idNumber << endl;
                 cout << "Full Name:" << '\t' << temp->fName << endl;
                 cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
                 cout << "Address:" << '\t' << temp->address << endl;
                 cout << "Gender:" << '\t' << temp->gender << endl;
                 cout << "Degree Program:" << '\t' << temp->dProgram << endl;
-                cout << "Year Level: " << '\t' << temp->yLevel << endl;
+                cout << "Year Level: " << '\t' <<   temp->yLevel << endl;
                 cout << endl << endl;
                 temp = temp->next;
             }
@@ -243,7 +243,7 @@ public:
     void searchRecord(int id) {
         Node* temp = nodeExists(id);
         if (temp != nullptr) {
-            cout << "Student ID Number:" << '\t' << temp->idNumber << endl;
+            cout << "Student ID Number:" << '\t' << fixed << setprecision(0) << temp->idNumber << endl;
             cout << "Full Name:" << '\t' << temp->fName << endl;
             cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
             cout << "Address:" << '\t' << temp->address << endl;
@@ -260,7 +260,7 @@ public:
         Node* temp = nodeExists_name(name);
 
         if (temp != nullptr) {
-            cout << "Student ID Number:" << '\t' << temp->idNumber << endl;
+            cout << "Student ID Number:" << '\t' << fixed << setprecision(0) << temp->idNumber << endl;
             cout << "Full Name:" << '\t' << temp->fName << endl;
             cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
             cout << "Address:" << '\t' << temp->address << endl;
@@ -465,8 +465,7 @@ Node* makeStudent(Node* n1) {
     double idNumber;
     string fname, address, gender, dProgram;
     int mm, dd, yy, yLevel;
-    while (true) {
-        bool checker = false;
+
             system("cls");
             cout << "Append Node Operation \nEnter Student & data of the Node to be Appended" << endl;
 
@@ -501,9 +500,8 @@ Node* makeStudent(Node* n1) {
                 }
             }
 
-            cin.ignore();
-
             while (true) {
+                cin.ignore();
                 cout << setw(27) << arrow1 << "Enter Gender: " << arrow2 << endl;
                 getline(cin, gender);
                 if (checkGENDER(gender) == false) {
@@ -514,12 +512,8 @@ Node* makeStudent(Node* n1) {
                     break;
                 }
             }
-    
-
             cout << setw(27) << arrow1 << "Enter Degree Program: " << arrow2 << endl;
             getline(cin, dProgram);
-
-
 
             while (true) {
                 cout << setw(27) << arrow1 << "Enter Year Level: " << arrow2 << endl;
@@ -532,8 +526,7 @@ Node* makeStudent(Node* n1) {
                     break;
                 }
             }
-         
-
+        
             n1->idNumber = idNumber;
             n1->fName = fname;
             n1->address = address;
@@ -543,9 +536,7 @@ Node* makeStudent(Node* n1) {
             n1->yLevel = yLevel;
             n1->yy = yy;
             n1->dProgram = dProgram;
- 
-            checker = true;
-    }
+
     return n1;
 }
 
@@ -585,7 +576,7 @@ bool checkBDAY(int dd, int mm, int yy) {
 };
 
 bool checkGENDER(string gender) {
-    if (gender == "Male" && gender == "Female") {
+    if (gender == "Male" || gender == "Female") {
         return true;
     }
     else {
