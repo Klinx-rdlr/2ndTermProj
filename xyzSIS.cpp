@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <conio.h>
+#include <sstream>
 
 using namespace std;
 char corner1 = 201, corner2 = 187, corner3 = 200, corner4 = 188, line = 205, side = 186, bullet = 254, arrow1 = 175, arrow2 = 174;
@@ -315,6 +315,7 @@ void searchRecord(StudentRecord obj);
 void deleteRecord(StudentRecord obj);
 void displayAllRecords(StudentRecord obj);
 void displaySpecificRecord(StudentRecord obj);
+void pause();
 
 int main() {
 
@@ -388,27 +389,27 @@ void displaySpecificRecord(StudentRecord obj) {
     switch (option) {
     case 1:
         obj.specificRecord("Name");
-        _getch();
+        pause();
         break;
     case 2:
         obj.specificRecord("Birthday");
-        _getch();
+        pause();
         break;
     case 3:
         obj.specificRecord("Gender");
-        _getch();
+        pause();
         break;
     case 4:
         obj.specificRecord("Address");
-        _getch();
+        pause();
         break;
     case 5:
         obj.specificRecord("Degree Program");
-        _getch();
+        pause();
         break;
     case 6:
         obj.specificRecord("Year Level");
-        _getch();
+        pause();
         break;
     default:
         cout << "Invalid input";
@@ -420,8 +421,7 @@ void displaySpecificRecord(StudentRecord obj) {
     void displayAllRecords(StudentRecord obj) {
         system("cls");
         obj.printList();
-        cout << "Press any key to go back\n";
-        _getch();
+        pause();
         return;
     };
 
@@ -444,8 +444,7 @@ void displaySpecificRecord(StudentRecord obj) {
             return;
         }
 
-        cout << "Press any key to go back\n";
-        _getch();
+        pause();
         return;
     };
 
@@ -502,3 +501,19 @@ Node* makeStudent(Node* n1) {
 
     return n1;
 }
+
+bool checkID(int num) {
+    string id;
+    stringstream ss;
+    ss << num;
+    ss >> id;
+    int size = id.length();
+    return true;
+};
+
+void pause() {
+    char trash;
+    cout << "\nEnter any key to continue..." << flush;
+    cin >> trash;
+    return;
+};
