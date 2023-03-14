@@ -366,6 +366,7 @@ int main() {
 
 
 void displaySpecificRecord(StudentRecord obj) {
+    system("cls");
     int option;
     cout << setw(27) << arrow1 << "Choose what record to display" << arrow2 << endl;
     cout << setw(27) << arrow1 << "-[1] Name-" << arrow2 << endl;
