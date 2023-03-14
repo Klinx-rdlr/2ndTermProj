@@ -8,7 +8,7 @@ char corner1 = 201, corner2 = 187, corner3 = 200, corner4 = 188, line = 205, sid
 
 class Node {
 public:
-    int idNumber;
+    double idNumber;
     string fName;
     int mm;
     int dd;
@@ -21,6 +21,14 @@ public:
     Node* previous;
 
     Node() {
+        mm = 0;
+        dd = 0;
+        yy = 0;
+        yLevel = 0;
+        address = "";
+        gender = "";
+        dProgram = "";
+        fName = "";
         next = nullptr;
         previous = nullptr;
     }
@@ -495,4 +503,4 @@ Node* makeStudent(Node* n1) {
     n1->dProgram = dProgram;
 
     return n1;
-}
+};
