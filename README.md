@@ -1,3 +1,4 @@
 # 2ndTermProj
 
-Project sa fking ccs0007L
+Code = xyzSIS.cpp
+SMS = Student Information System
