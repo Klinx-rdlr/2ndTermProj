@@ -26,15 +26,15 @@ public:
     }
 };
 
-class DoublyLinkedList {
+class StudentRecord {
 
 public:
     Node* head;
 
-    DoublyLinkedList() {
-        head = NULL;
+    StudentRecord() {
+        head = nullptr;
     }
-    DoublyLinkedList(Node* n) {
+    StudentRecord(Node* n) {
         head = n;
     }
 
@@ -49,6 +49,20 @@ public:
                 temp = ptr;
             }
             ptr = ptr -> next;
+        }
+
+        return temp;
+    }
+
+    Node* nodeExists_name(string k) {
+        Node* temp = NULL;
+        Node* ptr = head;
+
+        while (ptr != NULL) {
+            if (ptr->fName == k) {
+                temp = ptr;
+            }
+            ptr = ptr->next;
         }
 
         return temp;
@@ -134,13 +148,13 @@ public:
             Node* temp = head;
 
             while (temp != NULL) {
-                cout << "Student ID Number:" << setw(10) << temp->idNumber << endl;
-                cout << "Full Name:" << setw(10) << temp->fName << endl;
-                cout << "Birthday:" << setw(10) << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
-                cout << "Address:" << setw(10) << temp->address << endl;
-                cout << "Gender:" << setw(10) << temp->gender << endl;
-                cout << "Degree Program:" << setw(10) << temp->dProgram << endl;
-                cout << "Year Level: " << setw(10) << temp->yLevel << endl;
+                cout << "Student ID Number:" << '\t' << temp->idNumber << endl;
+                cout << "Full Name:" << '\t' << temp->fName << endl;
+                cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
+                cout << "Address:" << '\t' << temp->address << endl;
+                cout << "Gender:" << '\t' << temp->gender << endl;
+                cout << "Degree Program:" << '\t' << temp->dProgram << endl;
+                cout << "Year Level: " << '\t' << temp->yLevel << endl;
                 cout << endl << endl;
                 temp = temp -> next;
             }
@@ -148,15 +162,38 @@ public:
 
     }
 
+    void searchRecord(int id) {
+        Node* temp = nodeExists(id);
+        cout << "Student ID Number:" << '\t' << temp->idNumber << endl;
+        cout << "Full Name:" << '\t' << temp->fName << endl;
+        cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
+        cout << "Address:" << '\t' << temp->address << endl;
+        cout << "Gender:" << '\t' << temp->gender << endl;
+        cout << "Degree Program:" << '\t' << temp->dProgram << endl;
+        cout << "Year Level: " << '\t' << temp->yLevel << endl;
+    }
+
+    void searchRecord(string name) {
+        Node* temp = nodeExists_name(name);
+        cout << "Student ID Number:" << '\t' << temp->idNumber << endl;
+        cout << "Full Name:" << '\t' << temp->fName << endl;
+        cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
+        cout << "Address:" << '\t' << temp->address << endl;
+        cout << "Gender:" << '\t' << temp->gender << endl;
+        cout << "Degree Program:" << '\t' << temp->dProgram << endl;
+        cout << "Year Level: " << '\t' << temp->yLevel << endl;
+    }
+
 };
+
+Node* makeStudent(Node* n1);
+void Search_Record(StudentRecord obj);
 
 int main() {
 
-    DoublyLinkedList obj;
+    StudentRecord obj;
     int option;
-    double idNumber;
-    string fname, address, gender, dProgram;
-    int mm, dd, yy, yLevel;
+    int idNumber;
     do {
         system("cls"); system("Color 0E");
         cout << corner1 << setfill(line) << setw(32) << arrow1 << "HOME" << arrow2 << setw(35) << corner2;
@@ -182,48 +219,13 @@ int main() {
         case 0:
             break;
         case 1:
-            system("cls");
-            cout << "Append Node Operation \nEnter Student & data of the Node to be Appended" << endl;
-            
-            cout << setw(27) << arrow1 << "Enter Student ID Number: " << arrow2 << endl;
-            cin >> idNumber;
-
-            cin.ignore();
-            cout << setw(27) << arrow1 << "Enter Full Name: " << arrow2 << endl;
-            getline(cin, fname);
-
-            cout << setw(27) << arrow1 << "Enter Address: " << arrow2 << endl;
-            getline(cin, address);
-
-            cout << setw(27) << arrow1 << "Enter Birthday: " << arrow2 << endl;
-            cin >> mm >> dd >> yy;
-
-            cin.ignore();
-
-            cout << setw(27) << arrow1 << "Enter Gender: " << arrow2 << endl;
-            getline(cin, gender);
-
-            cout << setw(27) << arrow1 << "Enter Degree Program: " << arrow2 << endl;
-            getline(cin, dProgram);
-
-            cout << setw(27) << arrow1 << "Enter Year Level: " << arrow2 << endl;
-            cin >> yLevel;
- 
-            n1->idNumber = idNumber;
-            n1->fName = fname;
-            n1->address = address;
-            n1->dd = dd;
-            n1->mm = mm;
-            n1->gender = gender;
-            n1->yLevel = yLevel;
-            n1->yy = yy;
-            n1->dProgram = dProgram;
-
-            obj.appendNode(n1);
+            obj.appendNode(makeStudent(n1));
             break;
 
         case 2:
-
+            Search_Record(obj);
+            cout << "Press any key to go back\n";
+            _getch();
             break;
         case 3:
             system("cls");
@@ -234,7 +236,7 @@ int main() {
             _getch();
             break;
         case 4:
-            cout << "Update student info By Key Operation - \nEnter key & NEW data to be updated" << endl;
+            cout << "" << endl;
             cin >> idNumber;
             // cin >> data1;
              //obj.updateNodeByKey(key1, data1);
@@ -257,3 +259,66 @@ int main() {
     return 0;
 }
 
+
+void Search_Record(StudentRecord obj) {
+    int user_option; string name; double idNumber;
+    cout << "Search for record using\n [1] Student ID number.\n [2] Student Name.\n " << endl;
+    cin >> user_option;
+    if (user_option == 1) {
+        cout << "Enter Student ID number";
+        cin >> idNumber;
+        obj.searchRecord(idNumber);
+    }
+    else if (user_option == 2) {
+        cout << "Enter Student Name";
+        cin >> name;
+        obj.searchRecord(name);
+    }
+}
+
+
+
+Node* makeStudent(Node* n1) {
+    double idNumber;
+    string fname, address, gender, dProgram;
+    int mm, dd, yy, yLevel;
+
+    system("cls");
+    cout << "Append Node Operation \nEnter Student & data of the Node to be Appended" << endl;
+
+    cout << setw(27) << arrow1 << "Enter Student ID Number: " << arrow2 << endl;
+    cin >> idNumber;
+
+    cin.ignore();
+    cout << setw(27) << arrow1 << "Enter Full Name: " << arrow2 << endl;
+    getline(cin, fname);
+
+    cout << setw(27) << arrow1 << "Enter Address: " << arrow2 << endl;
+    getline(cin, address);
+
+    cout << setw(27) << arrow1 << "Enter Birthday: " << arrow2 << endl;
+    cin >> mm >> dd >> yy;
+
+    cin.ignore();
+
+    cout << setw(27) << arrow1 << "Enter Gender: " << arrow2 << endl;
+    getline(cin, gender);
+
+    cout << setw(27) << arrow1 << "Enter Degree Program: " << arrow2 << endl;
+    getline(cin, dProgram);
+
+    cout << setw(27) << arrow1 << "Enter Year Level: " << arrow2 << endl;
+    cin >> yLevel;
+
+    n1->idNumber = idNumber;
+    n1->fName = fname;
+    n1->address = address;
+    n1->dd = dd;
+    n1->mm = mm;
+    n1->gender = gender;
+    n1->yLevel = yLevel;
+    n1->yy = yy;
+    n1->dProgram = dProgram;
+
+    return n1;
+}
