@@ -316,6 +316,8 @@ void deleteRecord(StudentRecord obj);
 void displayAllRecords(StudentRecord obj);
 void displaySpecificRecord(StudentRecord obj);
 void pause();
+bool checkID(double num);
+bool checkBDAY(int dd, int mm, int yy);
 
 int main() {
 
@@ -461,55 +463,102 @@ Node* makeStudent(Node* n1) {
     double idNumber;
     string fname, address, gender, dProgram;
     int mm, dd, yy, yLevel;
+    while (true) {
+        bool checker = false;
+            system("cls");
+            cout << "Append Node Operation \nEnter Student & data of the Node to be Appended" << endl;
 
-    system("cls");
-    cout << "Append Node Operation \nEnter Student & data of the Node to be Appended" << endl;
+            while (true) {
+                cout << setw(27) << arrow1 << "Enter Student ID Number: " << arrow2 << endl;
+                cin >> idNumber;
+                if (checkID(idNumber) == false) {
+                    cout << "Invalid Student Number, must consist of 7 digit number, please try again\n";
+                    pause();
+                }
+                else {
+                    break;
+                }
+            }
 
-    cout << setw(27) << arrow1 << "Enter Student ID Number: " << arrow2 << endl;
-    cin >> idNumber;
+            cin.ignore();
+            cout << setw(27) << arrow1 << "Enter Full Name: " << arrow2 << endl;
+            getline(cin, fname);
 
-    cin.ignore();
-    cout << setw(27) << arrow1 << "Enter Full Name: " << arrow2 << endl;
-    getline(cin, fname);
+            cout << setw(27) << arrow1 << "Enter Address: " << arrow2 << endl;
+            getline(cin, address);
+            
+            while (true) {
+                cout << setw(27) << arrow1 << "Enter Birthday: " << arrow2 << endl;
+                cin >> dd >> mm >> yy;
+                if (checkBDAY(dd, mm, yy) == false) {
+                    cout << "Invalid Birthday format, please try again\n";
+                    pause();
+                }
+                else {
+                    break;
+                }
+            }
 
-    cout << setw(27) << arrow1 << "Enter Address: " << arrow2 << endl;
-    getline(cin, address);
+            cin.ignore();
 
-    cout << setw(27) << arrow1 << "Enter Birthday: " << arrow2 << endl;
-    cin >> mm >> dd >> yy;
+            cout << setw(27) << arrow1 << "Enter Gender: " << arrow2 << endl;
+            getline(cin, gender);
 
-    cin.ignore();
+            cout << setw(27) << arrow1 << "Enter Degree Program: " << arrow2 << endl;
+            getline(cin, dProgram);
 
-    cout << setw(27) << arrow1 << "Enter Gender: " << arrow2 << endl;
-    getline(cin, gender);
+            cout << setw(27) << arrow1 << "Enter Year Level: " << arrow2 << endl;
+            cin >> yLevel;
 
-    cout << setw(27) << arrow1 << "Enter Degree Program: " << arrow2 << endl;
-    getline(cin, dProgram);
-
-    cout << setw(27) << arrow1 << "Enter Year Level: " << arrow2 << endl;
-    cin >> yLevel;
-
-    n1->idNumber = idNumber;
-    n1->fName = fname;
-    n1->address = address;
-    n1->dd = dd;
-    n1->mm = mm;
-    n1->gender = gender;
-    n1->yLevel = yLevel;
-    n1->yy = yy;
-    n1->dProgram = dProgram;
-
+            n1->idNumber = idNumber;
+            n1->fName = fname;
+            n1->address = address;
+            n1->dd = dd;
+            n1->mm = mm;
+            n1->gender = gender;
+            n1->yLevel = yLevel;
+            n1->yy = yy;
+            n1->dProgram = dProgram;
+ 
+            checker == true;
+    }
     return n1;
 }
 
-bool checkID(int num) {
+bool checkID(double num) {
     string id;
     stringstream ss;
     ss << num;
     ss >> id;
     int size = id.length();
-    return true;
+    if (size < 7) {
+        return false;
+    }
+    else {
+        return true;
+    }
 };
+
+bool checkBDAY(int dd, int mm, int yy) {
+    string day, month, year;
+    stringstream ss;
+    ss << dd;
+    ss >> day;
+    ss.clear();
+    ss << mm;
+    ss >> month;
+    ss.clear();
+    ss << yy;
+    ss >> year;
+
+    if ((day.length() >= 1 && day.length() <= 2)  &&  (month.length() >= 1 && month.length() <= 2) && (year.length() == 4)  && (yy < 2023)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+
+}
 
 void pause() {
     char trash;
