@@ -185,41 +185,22 @@ public:
             return count;
         }
     };
-    /*
-        int * collectRecord(string name) {
-                int size = listCount();
-                int* year_lvl = new int[size];
-                int* dd = new int[size];
-                int* mm = new int[size];
-                int* yy = new int[size];
 
-                Node* temp = head;
-                int i = 0;
-                while (temp != nullptr) {
-                    year_lvl[i] = temp->yLevel;
-                    dd[i] = temp->dd;
-                    mm[i] = temp->mm;
-                    yy[i] = temp->yy;
+    int* collectRecord_int(string name) {
+        int size = listCount();
+        int* year_lvl = new int[size];
 
-                    i++;
-                    temp = temp->next;
-                }
-                if (name == "Birthday") {
-                    return
-                }
-
-                int* Birthday[3];
-                Birthday[0] = dd;
-                Birthday[1] = mm;
-                Birthday[]
-                for (int i = 0; i < size; i++) {
-
-                }
-                else {
-                    return year_lvl;
-                }
+        Node* temp = head;
+        int i = 0;
+        while (temp != nullptr) {
+            year_lvl[i] = temp->yLevel;
+            i++;
+            temp = temp->next;
         }
-    */
+       
+        return year_lvl;
+    };
+ 
 
 
     string* collectRecord(string name) {
@@ -254,6 +235,8 @@ public:
         }
         else if (name == "Degree Program") {
             return degprog;
+        }else{
+            return nullptr;
         }
     };
 
@@ -293,8 +276,8 @@ public:
     void specificRecord(string name) {
         system("cls");
         Node* temp = head;
-        cout << "ID Number: " << "Gender: \n";
         if (name == "Name" || name == "Gender" || name == "Address" || name == "Degree Program") {
+            cout << "ID Number: " << name << '\n';
             string* values;
             values = collectRecord(name);
             int i = 0;
@@ -304,6 +287,24 @@ public:
                 temp = temp->next;
             }
 
+        }
+        else if (name == "Year Level") {
+            cout << "ID Number: " << "Year Level:\n";
+            int* values;
+            values = collectRecord_int(name);
+            int i = 0;
+            while (temp != nullptr) {
+                cout << temp->idNumber << '\t' << values[i] << endl;
+                i++;
+                temp = temp->next;
+            }
+        }
+        else {
+            cout << "ID Number: " << "Year Level:'\n'";
+            while (temp != nullptr) {
+                cout << temp->idNumber << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
+                temp = temp->next;
+            }
         }
 
     };
@@ -319,7 +320,6 @@ int main() {
 
     StudentRecord obj;
     int option;
-    int idNumber;
     do {
         system("cls"); system("Color 0E");
         cout << corner1 << setfill(line) << setw(32) << arrow1 << "HOME" << arrow2 << setw(35) << corner2;
@@ -419,9 +419,7 @@ void displaySpecificRecord(StudentRecord obj) {
 
     void displayAllRecords(StudentRecord obj) {
         system("cls");
-        char option;
         obj.printList();
-
         cout << "Press any key to go back\n";
         _getch();
         return;
@@ -503,4 +501,4 @@ Node* makeStudent(Node* n1) {
     n1->dProgram = dProgram;
 
     return n1;
-};
+}
