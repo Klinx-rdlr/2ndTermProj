@@ -318,6 +318,8 @@ void displaySpecificRecord(StudentRecord obj);
 void pause();
 bool checkID(double num);
 bool checkBDAY(int dd, int mm, int yy);
+bool checkGENDER(string gender);
+bool checkYRLVL(int yrlvl);
 
 int main() {
 
@@ -491,7 +493,7 @@ Node* makeStudent(Node* n1) {
                 cout << setw(27) << arrow1 << "Enter Birthday: " << arrow2 << endl;
                 cin >> dd >> mm >> yy;
                 if (checkBDAY(dd, mm, yy) == false) {
-                    cout << "Invalid Birthday format, please try again\n";
+                    cout << "Invalid Birthday format, use dd/mm/yyyy, please try again\n";
                     pause();
                 }
                 else {
@@ -501,14 +503,36 @@ Node* makeStudent(Node* n1) {
 
             cin.ignore();
 
-            cout << setw(27) << arrow1 << "Enter Gender: " << arrow2 << endl;
-            getline(cin, gender);
+            while (true) {
+                cout << setw(27) << arrow1 << "Enter Gender: " << arrow2 << endl;
+                getline(cin, gender);
+                if (checkGENDER(gender) == false) {
+                    cout << "Invalid Input, please try again";
+                    pause();
+                }
+                else {
+                    break;
+                }
+            }
+    
 
             cout << setw(27) << arrow1 << "Enter Degree Program: " << arrow2 << endl;
             getline(cin, dProgram);
 
-            cout << setw(27) << arrow1 << "Enter Year Level: " << arrow2 << endl;
-            cin >> yLevel;
+
+
+            while (true) {
+                cout << setw(27) << arrow1 << "Enter Year Level: " << arrow2 << endl;
+                cin >> yLevel;
+                if (checkYRLVL(yLevel) == false) {
+                    cout << "Invalid Input, please try again";
+                    pause();
+                }
+                else {
+                    break;
+                }
+            }
+         
 
             n1->idNumber = idNumber;
             n1->fName = fname;
@@ -520,7 +544,7 @@ Node* makeStudent(Node* n1) {
             n1->yy = yy;
             n1->dProgram = dProgram;
  
-            checker == true;
+            checker = true;
     }
     return n1;
 }
@@ -551,13 +575,31 @@ bool checkBDAY(int dd, int mm, int yy) {
     ss << yy;
     ss >> year;
 
-    if ((day.length() >= 1 && day.length() <= 2)  &&  (month.length() >= 1 && month.length() <= 2) && (year.length() == 4)  && (yy < 2023)) {
+    if ((day.length() >= 1 && day.length() <= 2) && (month.length() >= 1 && month.length() <= 2) && (year.length() == 4) && (yy < 2023)) {
         return true;
     }
     else {
         return false;
     }
 
+};
+
+bool checkGENDER(string gender) {
+    if (gender == "Male" && gender == "Female") {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool checkYRLVL(int yrlvl) {
+    if (yrlvl >= 1 && yrlvl <= 4) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 void pause() {
