@@ -12,24 +12,26 @@ private:
     double idNumber;
 public:
 
-    double getID() {
+    double getID()
+    {
         return idNumber;
     }
 
-    void setID(int num) {
+    void setID(int num)
+    {
         idNumber = num;
     }
 
     string fName;
-    int mm;
-    int dd;
-    int yy;
     string address;
     string gender;
     string dProgram;
-    int yLevel;
     Node* next;
     Node* previous;
+    int mm;
+    int dd;
+    int yy;
+    int yLevel;
 
     Node() {
         mm = 0;
@@ -45,26 +47,32 @@ public:
     }
 };
 
-class StudentRecord {
+class StudentRecord
+{
 
 public:
     Node* head;
 
-    StudentRecord() {
+    StudentRecord()
+    {
         head = nullptr;
     }
-    StudentRecord(Node* n) {
+    StudentRecord(Node* n)
+    {
         head = n;
     }
 
     // 1. CHeck if node exists using key value
 
-    Node* nodeExists(int k) {
+    Node* nodeExists(int k)
+    {
         Node* temp = nullptr;
         Node* ptr = head;
 
-        while (ptr != nullptr) {
-            if (ptr->getID() == k) {
+        while (ptr != nullptr)
+        {
+            if (ptr->getID() == k)
+            {
                 temp = ptr;
             }
             ptr = ptr->next;
@@ -73,12 +81,15 @@ public:
         return temp;
     }
 
-    Node* nodeExists_name(string k) {
+    Node* nodeExists_name(string k)
+    {
         Node* temp = nullptr;
         Node* ptr = head;
 
-        while (ptr != nullptr) {
-            if (ptr->fName == k) {
+        while (ptr != nullptr)
+        {
+            if (ptr->fName == k)
+            {
                 temp = ptr;
             }
             ptr = ptr->next;
@@ -86,21 +97,23 @@ public:
 
         return temp;
     }
-
-    // 2. Append a node to the list
 
     void appendNode(Node* n) {
-        if (nodeExists(n->getID()) != nullptr) {
+        if (nodeExists(n->getID()) != nullptr)
+        {
             cout << "Node Already exists with key value : " << n->getID() << ". Append another node with different Key value" << endl;
         }
         else {
-            if (head == NULL) {
+            if (head == nullptr)
+            {
                 head = n;
                 cout << "Node Appended as Head Node" << endl;
             }
-            else {
+            else
+            {
                 Node* ptr = head;
-                while (ptr->next != NULL) {
+                while (ptr->next != nullptr)
+                {
                     ptr = ptr->next;
                 }
                 ptr->next = n;
@@ -110,30 +123,31 @@ public:
         }
     }
 
-    // 5. Delete node by unique key. Basically De-Link not delete
-    void deleteNodeByKey(double k) {
+    void deleteNodeByKey(double k)
+    {
         Node* ptr = nodeExists(k);
-        if (ptr == nullptr) {
+        if (ptr == nullptr)
+        {
             cout << "Student ID with this number: " << k << " doesn't exist, please try again" << endl;
         }
         else {
 
-            if (head->getID() == k) {
+            if (head->getID() == k)
+            {
                 head = head->next;
                 cout << "Student ID with number: " << k << " is officially deleted" << endl;
             }
             else {
                 Node* nextNode = ptr->next;
                 Node* prevNode = ptr->previous;
-                // deleting at the end
-                if (nextNode == nullptr) {
 
+                if (nextNode == nullptr)
+                {
                     prevNode->next = nullptr;
                     cout << "Student ID with number: " << k << " is officially deleted" << endl;
                 }
-
-                //deleting in between
-                else {
+                else
+                {
                     prevNode->next = nextNode;
                     nextNode->previous = prevNode;
                     cout << "Student ID with number: " << k << " is officially deleted" << endl;
@@ -141,46 +155,52 @@ public:
                 }
             }
         }
-    }
+    };
 
-    // 6th update node
-    void updateNodeByKey(int k, int d) {
+    void updateNodeByKey(int k, int d)
+    {
 
         Node* ptr = nodeExists(k);
-        if (ptr != NULL) {
-            // ptr -> data  = d;
+        if (ptr != NULL)
+        {
+
             cout << "Node Data Updated Successfully" << endl;
         }
-        else {
+        else
+        {
             cout << "Node Doesn't exist with key value : " << k << endl;
         }
 
     }
 
     // 7th printing
-    void printList() {
-        if (head == nullptr) {
+    void printList()
+    {
+        if (head == nullptr)
+        {
             cout << "No Nodes in Doubly Linked List";
         }
         else {
-            cout << setw(20) << corner1 << setfill(line) << setw(100) << setw(72) << corner2 << endl;
-            cout << "\t\t   " << side << "\t\t\t\t\t\t\t\t\t   " << side << endl;
-            cout << "\t\t   " << side << "\t\t   LIST OF ALL STUDENT RECORDS\t\t\t   " << side << endl;
-            cout << "\t\t   " << side << "\t\t\t\t\t\t\t\t\t   " << side << endl;
-            cout << setfill(' ') << setw(20) << corner3 << setfill(line) << setw(72) << corner4 << endl;
             Node* temp = head;
 
-            while (temp != nullptr) {
+            cout << setw(20) << corner1 << setfill(line) << setw(80) << setw(58) << corner2 << endl;
+            cout << "\t\t   " << side << "\t\t\t\t\t\t\t" << "     " << side << endl;
+            cout << "\t\t   " << side << "\t\t   LIST OF ALL STUDENT RECORDS\t\t" << "     " << side << endl;
+            cout << "\t\t   " << side << "\t\t\t\t\t\t\t" << "     " << side << endl;
+            cout << setfill(' ') << setw(20) << corner3 << setfill(line) << setw(58) << corner4 << endl;
+
+            while (temp != nullptr)
+            {
                 cout << setw(80) << setfill(line) << endl;
-                cout << "\nSTUDENT ID NUMBER:" << '\t' << fixed << setprecision(0) << temp->getID() << endl;
-                cout << "FULL NAME:" << '\t' << temp->fName << endl;
-                cout << "BIRTHDAY:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
-                cout << "ADDRESS:" << '\t' << temp->address << endl;
-                cout << "GENDER:" << '\t' << temp->gender << endl;
-                cout << "DEGREE PROGRAM:" << '\t' << temp->dProgram << endl;
-                cout << "YEAR LEVEL: " << '\t' << temp->yLevel << endl;
+                cout << "\nSTUDENT ID NUMBER:" << "\t" << fixed << setprecision(0) << temp->getID() << endl;
+                cout << "FULL NAME:" << "\t\t" << temp->fName << endl;
+                cout << "BIRTHDAY:" << "\t\t" << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
+                cout << "ADDRESS:" << "\t\t" << temp->address << endl;
+                cout << "GENDER:" << "\t\t\t" << temp->gender << endl;
+                cout << "DEGREE PROGRAM:" << "\t\t" << temp->dProgram << endl;
+                cout << "YEAR LEVEL: " << "\t\t" << temp->yLevel << endl;
                 cout << setw(80) << setfill(line) << endl;
-                cout << endl << endl;
+
                 temp = temp->next;
             }
         }
@@ -188,14 +208,18 @@ public:
     };
 
 
-    int listCount() {
-        int count = NULL;
-        if (head == nullptr) {
+    int listCount()
+    {
+        int count = 0;
+        if (head == nullptr)
+        {
             return 0;
         }
         else {
             Node* temp = head;
-            while (temp != nullptr) {
+
+            while (temp != nullptr)
+            {
                 count++;
                 temp = temp->next;
             }
@@ -203,14 +227,16 @@ public:
         }
     };
 
-    int* collectRecord_int(string name) {
-        int size = listCount();
+    int* collectRecord_int(string name)
+    {
+        int size = listCount(); int i = 0;
         int* year_lvl = new int[size];
-
         Node* temp = head;
-        int i = 0;
-        while (temp != nullptr) {
+
+        while (temp != nullptr)
+        {
             year_lvl[i] = temp->yLevel;
+
             i++;
             temp = temp->next;
         }
@@ -220,98 +246,117 @@ public:
 
 
 
-    string* collectRecord(string name) {
-        int size = listCount();
+    string* collectRecord(string name)
+    {
+        int size = listCount(); int i = 0;
+        Node* temp = head;
+
         string* fname = new string[size];
         string* address = new string[size];
         string* gender = new string[size];
         string* degprog = new string[size];
-        Node* temp = head;
-        int i = 0;
-        if (temp == nullptr) {
+
+        if (temp == nullptr)
+        {
             return nullptr;
         }
-        else {
-            while (temp != nullptr) {
+        else
+        {
+            while (temp != nullptr)
+            {
                 fname[i] = temp->fName;
                 address[i] = temp->address;
                 gender[i] = temp->gender;
                 degprog[i] = temp->dProgram;
+
                 i++;
                 temp = temp->next;
             }
         };
-        if (name == "Name") {
-            return fname;
-        }
-        else if (name == "Address") {
-            return address;
-        }
-        else if (name == "Gender") {
-            return gender;
-        }
-        else if (name == "Degree Program") {
-            return degprog;
-        }
-        else {
-            return nullptr;
-        }
+
+        if (name == "Name") { return fname; }
+        else if (name == "Address") { return address; }
+        else if (name == "Gender") { return gender; }
+        else if (name == "Degree Program") { return degprog; }
+        else { return nullptr; }
+
     };
 
-    void searchRecord(int id) {
+    void searchRecord(int id)
+    {
         Node* temp = nodeExists(id);
-        if (temp != nullptr) {
-            cout << "Student ID Number:" << '\t' << fixed << setprecision(0) << temp->getID() << endl;
-            cout << "Full Name:" << '\t' << temp->fName << endl;
-            cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
-            cout << "Address:" << '\t' << temp->address << endl;
-            cout << "Gender:" << '\t' << temp->gender << endl;
-            cout << "Degree Program:" << '\t' << temp->dProgram << endl;
-            cout << "Year Level: " << '\t' << temp->yLevel << endl;
+
+        if (temp != nullptr)
+        {
+            cout << setw(80) << setfill(line) << endl;
+            cout << "\nSTUDENT ID NUMBER:" << "\t" << fixed << setprecision(0) << temp->getID() << endl;
+            cout << "FULL NAME:" << "\t\t" << temp->fName << endl;
+            cout << "BIRTHDAY:" << "\t\t" << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
+            cout << "ADDRESS:" << "\t\t" << temp->address << endl;
+            cout << "GENDER:" << "\t\t\t" << temp->gender << endl;
+            cout << "DEGREE PROGRAM:" << "\t\t" << temp->dProgram << endl;
+            cout << "YEAR LEVEL: " << "\t\t" << temp->yLevel << endl;
+            cout << setw(80) << setfill(line) << endl;
         }
-        else {
+        else
+        {
             cout << "Student ID number: " << id << " doesn't exist\n";
         }
     };
 
-    void searchRecord(string name) {
+    void searchRecord(string name)
+    {
         Node* temp = nodeExists_name(name);
 
-        if (temp != nullptr) {
-            cout << "Student ID Number:" << '\t' << fixed << setprecision(0) << temp->getID() << endl;
-            cout << "Full Name:" << '\t' << temp->fName << endl;
-            cout << "Birthday:" << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
-            cout << "Address:" << '\t' << temp->address << endl;
-            cout << "Gender:" << '\t' << temp->gender << endl;
-            cout << "Degree Program:" << '\t' << temp->dProgram << endl;
-            cout << "Year Level: " << '\t' << temp->yLevel << endl;
+        if (temp != nullptr)
+        {
+            cout << setw(80) << setfill(line) << endl;
+            cout << "\nSTUDENT ID NUMBER:" << "\t" << fixed << setprecision(0) << temp->getID() << endl;
+            cout << "FULL NAME:" << "\t\t" << temp->fName << endl;
+            cout << "BIRTHDAY:" << "\t\t" << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
+            cout << "ADDRESS:" << "\t\t" << temp->address << endl;
+            cout << "GENDER:" << "\t\t\t" << temp->gender << endl;
+            cout << "DEGREE PROGRAM:" << "\t\t" << temp->dProgram << endl;
+            cout << "YEAR LEVEL: " << "\t\t" << temp->yLevel << endl;
+            cout << setw(80) << setfill(line) << endl;
         }
-        else {
+        else
+        {
             cout << "Student Name: " << name << " doesn't exist\n";
         }
     };
 
-    void specificRecord(string name) {
+    void specificRecord(string name)
+    {
         system("cls");
         Node* temp = head;
-        if (name == "Name" || name == "Gender" || name == "Address" || name == "Degree Program") {
-            cout << "ID Number: \t\t\t" << name << ":\n";
+
+        if (name == "Name" || name == "Gender" || name == "Address" || name == "Degree Program")
+        {
             string* values;
             values = collectRecord(name);
+
+            cout << "ID Number: \t\t\t" << name << ":\n";
+
             int i = 0;
-            while (temp != nullptr) {
+            while (temp != nullptr)
+            {
                 cout << temp->getID() << '\t' << values[i] << endl;
                 i++;
                 temp = temp->next;
             }
 
         }
-        else if (name == "Year Level") {
-            cout << "ID Number: \t\t\t" << "Year Level:\n";
+        else if (name == "Year Level")
+        {
             int* values;
             values = collectRecord_int(name);
+
+            cout << "ID Number: \t\t\t" << "Year Level:\n";
+
             int i = 0;
-            while (temp != nullptr) {
+            while (temp != nullptr)
+            {
                 cout << temp->getID() << '\t' << values[i] << endl;
                 i++;
                 temp = temp->next;
@@ -319,7 +364,9 @@ public:
         }
         else {
             cout << "ID Number: \t\t\t" << "Birthday:\n";
-            while (temp != nullptr) {
+
+            while (temp != nullptr)
+            {
                 cout << temp->getID() << '\t' << temp->dd << '/' << temp->mm << '/' << temp->yy << endl;
                 temp = temp->next;
             }
@@ -345,21 +392,22 @@ int main() {
     int option;
     do {
         system("cls"); system("Color 0E");
-        cout << corner1 << setfill(line) << setw(32) << arrow1 << "HOME" << arrow2 << setw(35) << corner2;
-        cout << endl << side << "\t\t\t\t\t\t\t\t\t" << side << endl;
-        cout << side << "\t\tWELCOME TO GROUP XYZ STUDENT INFORMATION SYSTEM\t\t" << side << endl;
-        cout << side << "\t\t\t\t\t\t\t\t\t" << side << endl;
-        cout << corner3 << setw(72) << corner4 << endl;
+        cout << setfill(' ') << setw(20) << corner1 << setfill(line) << setw(32) << arrow1 << "HOME" << arrow2 << setw(35) << corner2;
+        cout << endl << setfill(' ') << setw(20) << side << "   \t\t\t\t\t\t\t\t\t" << "   " << side << endl;
+        cout << setfill(' ') << setw(20) << side << "\t\t    WELCOME TO GROUP XYZ STUDENT INFORMATION SYSTEM\t" << "   " << side << endl;
+        cout << setfill(' ') << setw(20) << side << "\t\t\t\t\t\t\t\t\t" << "   " << side << endl;
+        cout << setfill(' ') << setw(20) << corner3 << setfill(line) << setw(72) << corner4 << endl;
         cout << setfill(' ');
-        cout << endl << setw(13) << "\t\t" << arrow1 << " - What do you want to do ? -" << arrow2 << endl << endl;
-        cout << setfill(line) << line << setw(72) << line << endl << endl;
+        cout << endl << setfill(' ') << setw(33) << "\t\t" << arrow1 << " - What do you want to do ? -" << arrow2 << endl << endl;
+        cout << setfill(' ') << setw(20) << line << setw(72) << setfill(line) << line << endl << endl;
         cout << setfill(' ');
-        cout << setw(27) << arrow1 << "-[1] Add New Record.-" << arrow2 << endl;
-        cout << setw(27) << arrow1 << "-[2] Search Record.-" << arrow2 << endl;
-        cout << setw(27) << arrow1 << "-[3] Display ALl Records.-" << arrow2 << endl;
-        cout << setw(27) << arrow1 << "-[4] Display Specific Record.-" << arrow2 << endl;
-        cout << setw(27) << arrow1 << "-[5] Delete Record.-" << arrow2 << endl;
-        cout << setw(27) << arrow1 << "-[6] Exit.-" << arrow2 << endl << endl;
+        cout << setw(41) << arrow1 << "-[1] Add New Record.-" << arrow2 << endl;
+        cout << setw(41) << arrow1 << "-[2] Search Record.-" << arrow2 << endl;
+        cout << setw(41) << arrow1 << "-[3] Display ALl Records.-" << arrow2 << endl;
+        cout << setw(41) << arrow1 << "-[4] Display Specific Record.-" << arrow2 << endl;
+        cout << setw(41) << arrow1 << "-[5] Delete Record.-" << arrow2 << endl;
+        cout << setw(41) << arrow1 << "-[6] Exit.-" << arrow2 << endl << endl;
+        cout << setfill(' ') << setw(41) << arrow1 << "CHOICE: ";
         cin >> option;
         Node* n1 = new Node();
         //Node n1;
@@ -405,16 +453,37 @@ int main() {
 void displaySpecificRecord(StudentRecord obj) {
     system("cls");
     int option;
-    cout << setw(27) << arrow1 << "Choose what record to display" << arrow2 << endl;
-    cout << setw(27) << arrow1 << "-[1] Name-" << arrow2 << endl;
-    cout << setw(27) << arrow1 << "-[2] Birthday-" << arrow2 << endl;
-    cout << setw(27) << arrow1 << "-[3] Gender-" << arrow2 << endl << endl;
-    cout << setw(27) << arrow1 << "-[4] Address-" << arrow2 << endl;
-    cout << setw(27) << arrow1 << "-[5] Degree Program-" << arrow2 << endl;
-    cout << setw(27) << arrow1 << "-[6] Year Level-" << arrow2 << endl << endl;
-    cin >> option;
+    system("cls"); system("Color 0E");
+    cout << setw(20) << corner1 << setfill(line) << setw(100) << setw(66) << corner2 << endl;
+    cout << setfill(' ') << setw(20) << side << setw(66) << side << endl;
+    cout << setw(20) << side << "\t\t   CHOOSE WHAT RECORD TO SEARCH" << setw(23) << side << endl;
+    cout << setw(20) << side << setw(21) << arrow1 << "-[0] Go Back-" << arrow2 << setw(31) << side << endl;
+    cout << setw(20) << side << setw(21) << arrow1 << "-[1] Name-" << arrow2 << setw(34) << side << endl;
+    cout << setw(20) << side << setw(21) << arrow1 << "-[2] Birthday-" << arrow2 << setw(30) << side << endl;
+    cout << setw(20) << side << setw(21) << arrow1 << "-[3] Gender-" << arrow2 << setw(32) << side << endl;
+    cout << setw(20) << side << setw(21) << arrow1 << "-[4] Address -" << arrow2 << setw(30) << side << endl;
+    cout << setw(20) << side << setw(21) << arrow1 << "-[5] Degree Program-" << arrow2 << setw(24) << side << endl;
+    cout << setw(20) << side << setw(21) << arrow1 << "-[6] Year Level-" << arrow2 << setw(28) << side << endl;
+    cout << setw(20) << side << setw(66) << side << endl;
+    cout << setfill(' ') << setw(20) << corner3 << setfill(line) << setw(66) << corner4 << endl;
+    cout << setfill(' ') << setw(41) << arrow1 << "CHOICE: ";
 
+    while (true) {
+        cin >> option;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore();
+            cout << setfill(' ') << setw(41) << arrow1 << "INVALID INPUT\n";
+            cout << setfill(' ') << setw(41) << arrow1 << "RE-ENTER - CHOICE: ";
+        }
+        else {
+            break;
+        }
+    }
+   
     switch (option) {
+    case 0:
+        return;
     case 1:
         obj.specificRecord("Name");
         pause();
@@ -454,26 +523,87 @@ void displayAllRecords(StudentRecord obj) {
 };
 
 void searchRecord(StudentRecord obj) {
+
     system("cls");
-    cout << corner1 << setfill(line) << setw(32) << setw(35) << corner2;
-    cout << endl << side << "\t\t\t\t\t\t\t\t\t" << side << endl;
-    cout << side << "\t\tSearch for record using\n [1] Student ID number.\n [2] Student Name.\n\t\t" << side << endl;
-    cout << side << "\t\t\t\t\t\t\t\t\t" << side << endl;
-    cout << corner3 << setw(72) << corner4 << endl;
     int user_option; string name; double idNumber;
-    cin >> user_option;
-    if (user_option == 1) {
-        cout << "Enter Student ID number";
-        cin >> idNumber;
+
+    cout << setw(20) << corner1 << setfill(line) << setw(80) << setw(58) << corner2 << endl;
+    cout << setfill(' ') << setw(20) << side << setw(58) << side << endl;
+    cout << setw(20) << side << "\t\t\t" << arrow1 << "SEARCH RECORD" << arrow2 << setfill(' ') << setw(23) << side << endl;
+    cout << setw(20) << side << "\t\t      [0] Go Back "  << setw(28) << side << endl;
+    cout << setw(20) << side << "\t\t      [1] Student ID number " <<  setw(18) << side << endl;
+    cout << setw(20) << side << "\t\t      [2] Student Name" << setw(24) << side << endl;
+    cout << setfill(' ') << setw(20) << side << setw(58) << side << endl;
+    cout << setfill(' ') << setw(20) << corner3 << setfill(line) << setw(58) << corner4 << endl;
+
+    cout << setfill(' ') << setw(41) << arrow1 << "CHOICE: ";
+    while (true) {
+
+        cin >> user_option;
+
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore();
+            cout << setfill(' ') << setw(41) << arrow1 << "INVALID INPUT\n";
+            cout << setfill(' ') << setw(41) << arrow1 << "RE-ENTER - CHOICE: ";
+        }
+        else {
+            break;
+        }
+    };
+
+    switch(user_option){
+
+    case 0: 
+        return;
+    case 1:
+        cout << setfill(' ') << setw(41) << arrow1 << "ENTER STUDENT ID: ";
+        while (true) {
+         
+            cin >> idNumber;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore();
+                cout << setfill(' ') << setw(41) << arrow1 << "INVALID INPUT\n";
+                cout << setfill(' ') << setw(41) << arrow1 << "RE - ENTER STUDENT ID: ";
+            }
+            else if ((checkID(idNumber) == false)) {
+                cout << setfill(' ') << setw(41) << arrow1 << "INVALID INPUT, ID NUMBER MUST BE 7 DIGITS\n";
+                cout << setfill(' ') << setw(41) << arrow1 << "RE - ENTER STUDENT ID: ";
+            }
+            else {
+                break;
+            }
+        };
+
+
+
         obj.searchRecord(idNumber);
-    }
-    else if (user_option == 2) {
-        cout << "Enter Student Name";
-        cin >> name;
+        break;
+    
+    case 2:
+        cout << setfill(' ') << setw(41) << arrow1 << "ENTER STUDENT NAME: ";
+        while (true) {
+
+            cin >> name;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore();
+                cout << setfill(' ') << setw(41) << arrow1 << "INVALID INPUT\n";
+                cout << setfill(' ') << setw(41) << arrow1 << "RE - ENTER STUDENT NAME: ";
+
+            }
+            else {
+                break;
+            };
+        };
+
         obj.searchRecord(name);
-    }
-    else {
-        cout << "wrong input, try again";
+        break;
+
+    default:
+        cout << setfill(' ') << setw(41) << arrow1 << "INVALID INPUT";
+        pause();
         return;
     }
 
@@ -483,17 +613,37 @@ void searchRecord(StudentRecord obj) {
 
 void deleteRecord(StudentRecord obj) {
     double idNumber;
-    system("cls"); system("Color 0E");
-    cout << setw(20) << corner1 << setfill(line) << setw(100) << setw(72) << corner2 << endl;
-    cout << "\t\t   " << side << "\t\t\t\t\t\t\t\t\t   " << side << endl;
-    cout << "\t\t   " << side << "\t\t   Delete Node By Student id number\t\t\t   " << side << endl;
-    cout << "\t\t   " << side << "\t\tEnter the student id number to be deleted : \t\t   " << side << endl;
-    cout << "\t\t   " << side << "\t\t\t\t\t\t\t\t\t   " << side << endl;
-    cout << setfill(' ') << setw(20) << corner3 << setfill(line) << setw(72) << corner4 << endl;
-    cout << setfill(' ');
-    cout << setw(52) << "ID NUMBER: ";
-    cin >> idNumber;
+
+    while (true) {
+        system("cls"); system("Color 0E");
+        cout << setw(20) << corner1 << setfill(line) << setw(100) << setw(66) << corner2 << endl;
+        cout << setfill(' ') << setw(20) << side << setw(66) << side << endl;
+        cout << setw(20) << side << "\t\t   Delete Node By Student id number" << setw(19) << side << endl;
+        cout << setw(20) << side << "\t\tEnter the student id number to be deleted : " << setw(10) << side << endl;
+        cout << setw(20) << side << "\t\t\t   Enter 0 to go back" << setw(25) << side << endl;
+        cout << setw(20) << side << setw(66) << side << endl;
+        cout << setfill(' ') << setw(20) << corner3 << setfill(line) << setw(66) << corner4 << endl;
+        cout << setfill(' ');
+        cout << setw(52) << "ID NUMBER: ";
+        cin >> idNumber;
+
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore();
+            idNumber = 0;
+            cout << setfill(' ') << setw(42) << arrow1 << "INVALID INPUT";
+            pause();
+        }
+        else if (idNumber == 0) {
+            return;
+        }
+        else {
+            break;
+        }
+    }
+
     obj.deleteNodeByKey(idNumber);
+    pause();
     return;
 };
 
@@ -522,7 +672,7 @@ Node* makeStudent(Node* n1) {
             cout << setfill(' ') << setw(37) << arrow1 << "INVALID INPUT";
             pause();
         }
-        else if(checkID(idNumber) == false) {
+        else if (checkID(idNumber) == false) {
             idNumber = 0;
             cout << setfill(' ') << setw(37) << arrow1 << "INVALID INPUT";
             pause();
@@ -546,16 +696,58 @@ Node* makeStudent(Node* n1) {
     cout << "\t\t\t\t    _________________________________________________________\n\n";
 
     while (true) {
+
         cout << setw(37) << arrow1 << "Enter Birthday: " << arrow2 << endl;
+        cout << setfill(' ') << setw(52) << "(EX. 03/04/2000)" << endl << endl;
+
         cout << setfill(' ') << setw(37) << arrow1 << "DD: ";
-        cin >> dd;
-        cout << "\t\t\t\t    ----------------";
+        while (true)
+        {
+            cin >> dd;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore();
+                cout << setfill(' ') << setw(37) << arrow1 << "INVALID INPUT\n";
+                cout << setfill(' ') << setw(37) << arrow1 << "RE-ENTER - DD: ";
+            }
+            else {
+                cout << "\t\t\t\t    ----------------";
+                break;
+            }
+        };
+
         cout << endl << setfill(' ') << setw(37) << arrow1 << "MM: ";
-        cin >> mm;
-        cout << "\t\t\t\t    ----------------";
+
+        while (true) {
+            cin >> mm;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore();
+                cout << setfill(' ') << setw(37) << arrow1 << "INVALID INPUT\n";
+                cout << endl << setfill(' ') << setw(37) << arrow1 << "RE-ENTER - MM: ";
+            }
+            else {
+                cout << "\t\t\t\t    ----------------";
+                break;
+            }
+        };
+
         cout << endl << setfill(' ') << setw(37) << arrow1 << "YYYY: ";
-        cin >> yy;
-        cout << "\t\t\t\t    ----------------\n\n";
+        while (true) {
+            cin >> yy;
+
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore();
+                cout << setfill(' ') << setw(37) << arrow1 << "INVALID INPUT\n";
+                cout << endl << setfill(' ') << setw(37) << arrow1 << "RE-ENTER - YYYY: ";
+            }
+            else {
+                cout << "\t\t\t\t    ----------------\n";
+                break;
+            }
+        }
+
         if (checkBDAY(dd, mm, yy) == false) {
             cout << "Invalid Birthday format, use dd/mm/yyyy, please try again\n";
             pause();
@@ -568,6 +760,7 @@ Node* makeStudent(Node* n1) {
     while (true) {
         cin.ignore();
         cout << setw(37) << arrow1 << "Enter Gender: " << arrow2 << endl;
+        cout << setfill(' ') << setw(54) << "(EX. Male/Female)" << endl << endl;
         cout << setfill(' ') << setw(37) << arrow1 << "GENDER: ";
         getline(cin, gender);
         if (checkGENDER(gender) == false) {
@@ -671,3 +864,4 @@ void pause() {
     cin >> trash;
     return;
 };
+
